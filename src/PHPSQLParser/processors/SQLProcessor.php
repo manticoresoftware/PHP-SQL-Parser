@@ -230,15 +230,20 @@ class SQLProcessor extends SQLChunkProcessor {
                 break;
 
             case 'VIEW':
-            // prevent wrong processing as keyword
-                if ($prev_category === 'CREATE' || $prev_category === 'ALTER' || $prev_category === 'DROP') {
+                if ($prev_category === 'SHOW') {
+                    break;
+                }
+
+                if ($prev_category === 'CREATE' || $prev_category === 'ALTER') {
+                    $out[$prev_category][] = $trim;
                     $token_category = $upper;
                 }
                 break;
 
-            /*
-             * These tokens get their own section, but have no subclauses. These tokens identify the statement but have no specific subclauses of their own.
-             */
+
+                /*
+                 * These tokens get their own section, but have no subclauses. These tokens identify the statement but have no specific subclauses of their own.
+                 */
             case 'DELETE':
             case 'ALTER':
             case 'INSERT':
@@ -323,6 +328,11 @@ class SQLProcessor extends SQLChunkProcessor {
 	            break;
 
             case 'SOURCE':
+
+                if ($prev_category === 'SHOW') {
+                    break;
+                }
+
                 if ($prev_category === 'CREATE') {
                     $out[$prev_category][] = $trim;
                     $token_category = $upper;
