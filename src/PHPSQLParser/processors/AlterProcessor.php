@@ -40,6 +40,7 @@
  */
 
 namespace PHPSQLParser\processors;
+
 use PHPSQLParser\utils\ExpressionType;
 
 /**
@@ -49,14 +50,16 @@ use PHPSQLParser\utils\ExpressionType;
  * @license http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  *
  */
-class AlterProcessor extends AbstractProcessor {
+class AlterProcessor extends AbstractProcessor
+{
 
-    public function process($tokens) {
+    public function process($tokens)
+    {
         $result = $expr = array();
         $base_expr = "";
 
         foreach ($tokens as $token) {
-            
+
             $trim = trim($token);
             $base_expr .= $token;
 
@@ -66,51 +69,22 @@ class AlterProcessor extends AbstractProcessor {
 
             $upper = strtoupper($trim);
             switch ($upper) {
+                case 'TABLE':
+                    $result['expr_type'] = ExpressionType::TABLE;
+                    $expr[] = array('expr_type' => ExpressionType::RESERVED, 'base_expr' => $trim);
+                    break;
 
+                case 'SOURCE':
+                    $result['expr_type'] = ExpressionType::SOURCE;
+                    $expr[] = array('expr_type' => ExpressionType::RESERVED, 'base_expr' => $trim);
+                    break;
 
-            case 'TABLE':
-                // CREATE TABLE
-                $result['expr_type'] = ExpressionType::TABLE;
-                $expr[] = array('expr_type' => ExpressionType::RESERVED, 'base_expr' => $trim);
-                break;
+                case 'COLUMN':
+                    $expr[] = array('expr_type' => ExpressionType::RESERVED, 'base_expr' => $trim);
+                    break;
 
-            case 'SOURCE':
-                // CREATE SOURCE
-                $result['expr_type'] = ExpressionType::SOURCE;
-                $expr[] = array('expr_type' => ExpressionType::RESERVED, 'base_expr' => $trim);
-                break;
-
-            case 'COLUMN':
-                $expr[] = array('expr_type' => ExpressionType::RESERVED, 'base_expr' => $trim);
-                break;
-
-
-//            case 'UNIQUE':
-//            case 'FULLTEXT':
-//            case 'SPATIAL':
-//                // options of CREATE INDEX
-//                $result['base_expr'] = $result['expr_type'] = false;
-//                $result['constraint'] = $upper;
-//                $expr[] = array('expr_type' => ExpressionType::RESERVED, 'base_expr' => $trim);
-//                break;
-                                
-//            case 'IF':
-//                // option of CREATE TABLE
-//                $expr[] = array('expr_type' => ExpressionType::RESERVED, 'base_expr' => $trim);
-//                break;
-//
-//            case 'NOT':
-//                // option of CREATE TABLE
-//                $expr[] = array('expr_type' => ExpressionType::RESERVED, 'base_expr' => $trim);
-//                break;
-//
-//            case 'EXISTS':
-//                // option of CREATE TABLE
-//                $expr[] = array('expr_type' => ExpressionType::RESERVED, 'base_expr' => $trim);
-//                break;
-
-            default:
-                break;
+                default:
+                    break;
             }
         }
         $result['base_expr'] = trim($base_expr);
@@ -118,4 +92,5 @@ class AlterProcessor extends AbstractProcessor {
         return $result;
     }
 }
+
 ?>

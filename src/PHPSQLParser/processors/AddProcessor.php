@@ -69,7 +69,7 @@ class AddProcessor extends AbstractProcessor
 
             $trim = trim($token);
 
-            if (empty($skipAppendExpression)){
+            if (empty($skipAppendExpression)) {
                 $base_expr .= $token;
             }
 
@@ -88,7 +88,7 @@ class AddProcessor extends AbstractProcessor
                 case 'ENGINE':
                     $result['options'][] = ['expr_type' => ExpressionType::RESERVED, 'base_expr' => $trim];
                     $base_expr = str_replace($token, '', $base_expr);
-                    $skipAppendExpression=true;
+                    $skipAppendExpression = true;
                     $currCategory = 'TABLE_OPTION';
                     continue 2;
                 case '=':
