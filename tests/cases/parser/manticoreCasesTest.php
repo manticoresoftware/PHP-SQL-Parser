@@ -82,51 +82,37 @@ class manticoreCasesTest extends \PHPUnit\Framework\TestCase
             ['CREATE VIEW view_table', 'ms_create_view_1'],
             ["CREATE MATERIALIZED VIEW view_table TO destination_kafka AS SELECT id, term as name,
 		   abbrev as short_name, UTC_TIMESTAMP() as received_at, GlossDef.size as size FROM kafka", 'ms_create_view_2'],
-            ["CREATE TABLE destination_kafka (id bigint, name text, short_name text, received_at text, size multi)", 'ms_create_table_1'],
+            ["CREATE TABLE destination_kafka (id bigint, name text, short_name text, received_at text, size multi) engine='columnar'", 'ms_create_table_1'],
             ["SHOW TABLES", 'ms_show_tables_1'],
             ["SHOW TABLE abc", 'ms_show_tables_2'],
             ["SHOW TABLE `abc`", 'ms_show_tables_3'],
             ["SHOW SOURCES", 'ms_show_sources_1'],
             ["SHOW SOURCE abc", 'ms_show_sources_2'],
             ["SHOW SOURCE `abc`", 'ms_show_sources_3'],
-
             ["SHOW VIEWS", 'ms_show_views_1'],
             ["SHOW VIEWS aaa", 'ms_show_views_2'],
             ["SHOW VIEW abc", 'ms_show_views_3'],
             ["SHOW VIEW `abc`", 'ms_show_views_4'],
-
             ["SHOW MATERIALIZED VIEWS", 'ms_show_views_5'],
             ["SHOW MATERIALIZED VIEW abc", 'ms_show_views_6'],
             ["SHOW MATERIALIZED VIEW `abc`", 'ms_show_views_7'],
-
             ["DROP TABLE abc", 'ms_drop_table_1'],
             ["DROP TABLE `abc`", 'ms_drop_table_2'],
             ["DROP TABLE IF EXIST abc", 'ms_drop_table_3'],
-
             ["DROP SOURCE abc", 'ms_drop_source_1'],
             ["DROP SOURCE `abc`", 'ms_drop_source_2'],
             ["DROP SOURCE IF EXIST `abc`", 'ms_drop_source_3'],
-
             ["DROP VIEW `abc`", 'ms_drop_view_1'],
             ["DROP MATERIALIZED VIEW abc", 'ms_drop_view_2'],
-
-
             ["DROP VIEW IF EXIST abc", 'ms_drop_view_3'],
             ["DROP MATERIALIZED VIEW IF EXIST `abc`", 'ms_drop_view_4'],
+            ["alter table rt ADD column title int", 'ms_alter_table_1'],
+            ["alter table rt ADD column title text indexed stored engine='columnar'", 'ms_alter_table_2'],
+            ["ALTER SOURCE `abc` ADD column title int", 'ms_alter_source_1'],
 
-////
-//            ["ALTER TABLE abc", 'ms_alter_table_1'],
-//            ["ALTER TABLE `abc`", 'ms_alter_table_2'],
-//            ["ALTER TABLE abc MODIFY COLUMN string_column text", 'ms_alter_table_3'],
-//
-//            ["ALTER SOURCE abc", 'ms_alter_source_1'],
-//            ["ALTER SOURCE `abc`", 'ms_alter_source_2'],
-//            ["ALTER SOURCE IF EXIST `abc`", 'ms_alter_source_3'],
-//
-//            ["ALTER VIEW `abc`", 'ms_alter_view_1'],
-//            ["ALTER MATERIALIZED VIEW abc", 'ms_alter_view_2'],
-//            ["ALTER VIEW IF EXIST abc", 'ms_alter_view_3'],
-//            ["ALTER MATERIALIZED VIEW IF EXIST `abc`", 'ms_alter_view_4'],
+            ["ALTER VIEW `abc` ADD column title int", 'ms_alter_view_1'],
+            ["ALTER MATERIALIZED VIEW abc ADD column title int", 'ms_alter_view_2'],
+//            ["alter table rt charset_table='a,b,c,d'", 'ms_alter_table_3'],
         ];
     }
 }

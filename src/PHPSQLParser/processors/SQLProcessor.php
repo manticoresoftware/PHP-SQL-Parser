@@ -244,8 +244,11 @@ class SQLProcessor extends SQLChunkProcessor {
                 /*
                  * These tokens get their own section, but have no subclauses. These tokens identify the statement but have no specific subclauses of their own.
                  */
-            case 'DELETE':
+            case 'ADD':
             case 'ALTER':
+                $token_category = $upper;
+                break;
+            case 'DELETE':
             case 'INSERT':
             case 'OPTIMIZE':
             case 'GRANT':
@@ -333,13 +336,17 @@ class SQLProcessor extends SQLChunkProcessor {
                     break;
                 }
 
-                if ($prev_category === 'CREATE') {
+                if ($prev_category === 'CREATE' || $prev_category === 'ALTER') {
                     $out[$prev_category][] = $trim;
                     $token_category = $upper;
                 }
                 break;
 
             case 'TABLE':
+                if ($prev_category === 'ALTER') {
+                    $out[$prev_category][] = $trim;
+                    $token_category = $upper;
+                }
                 if ($prev_category === 'CREATE') {
                     $out[$prev_category][] = $trim;
                     $token_category = $upper;
@@ -452,6 +459,9 @@ class SQLProcessor extends SQLChunkProcessor {
 
             // This token is ignored, except within RENAME
             case 'TO':
+                if ($token_category === 'VIEW') {
+                    break;
+                }
                 if ($token_category === 'RENAME') {
                     break;
                 }
