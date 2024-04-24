@@ -127,6 +127,10 @@ class manticoreCasesTest extends \PHPUnit\Framework\TestCase
             ["DROP MV IF EXIST `abc`", 'ms_drop_view_4'],
             ["ALTER MV abc ADD column title int", 'ms_alter_view_2'],
             ["ALTER MV view_name suspended=1", 'ms_alter_table_3'],
+            // End aliases
+            ["ALTER TABLE old_table RENAME new_table", 'ms_alter_table_4'],
+            ["ALTER TABLE `old_table` RENAME `new_table`", 'ms_alter_table_5']
+
         ];
     }
 }
