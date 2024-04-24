@@ -56,6 +56,7 @@ class RenameProcessor extends AbstractProcessor {
         $base_expr = "";
         $resultList = array();
         $tablePair = array();
+        $objectType = ExpressionType::TABLE;
 
         foreach ($tokenList as $k => $v) {
             $token = new ExpressionToken($k, $v);
@@ -84,7 +85,6 @@ class RenameProcessor extends AbstractProcessor {
                 break;
 
             case 'TABLE':
-                $objectType = ExpressionType::TABLE;
                 $resultList[] = array('expr_type'=>ExpressionType::RESERVED, 'base_expr'=>$token->getTrim());   
                 continue 2; 
                 
