@@ -283,51 +283,45 @@ class PHPSQLLexer {
     }
 
     protected function balanceBackticks($tokens) {
-        $i = 0;
-        $cnt = count($tokens);
-        while ($i < $cnt) {
+        $unsetCount = 0;
+        $fullLength = sizeof($tokens);
+        foreach ($tokens as $k=> $token){
 
-            if (!isset($tokens[$i])) {
-                $i++;
+            if ($unsetCount>0){
+                unset($tokens[$k]);
+                $unsetCount--;
                 continue;
             }
-
-            $token = $tokens[$i];
-
             if ($this->isBacktick($token)) {
-                $tokens = $this->balanceCharacter($tokens, $i, $token);
+                list($token, $unsetCount) = $this->balanceCharacter($tokens, $k, $token, $fullLength);
+                $tokens[$k]=$token;
             }
-
-            $i++;
         }
 
-        return $tokens;
+        return array_values($tokens);
     }
 
     // backticks are not balanced within one token, so we have
     // to re-combine some tokens
-    protected function balanceCharacter($tokens, $idx, $char) {
+    protected function balanceCharacter($tokens, $startPosition, $char, $fullLength) {
 
-        $token_count = count($tokens);
-        $i = $idx + 1;
-        while ($i < $token_count) {
+        $shift = 0;
+        $startPosition ++;
 
-            if (!isset($tokens[$i])) {
-                $i++;
-                continue;
-            }
-
+        $between[] = $char;
+        for ($i = $startPosition; $i < $fullLength; $i++) {
             $token = $tokens[$i];
-            $tokens[$idx] .= $token;
-            unset($tokens[$i]);
-
+            $between[] = $token;
+            $shift++;
             if ($token === $char) {
                 break;
             }
-
-            $i++;
         }
-        return array_values($tokens);
+
+
+        $result = implode("", $between);
+
+        return [$result, $shift];
     }
 
     /**
