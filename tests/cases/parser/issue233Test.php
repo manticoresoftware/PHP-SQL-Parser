@@ -8,6 +8,7 @@ class issue233Test extends TestCase
 {
     public function testIssue233()
     {
+        $this->markTestSkipped("This syntax is not applicable for manticoresearch");
         $sql="#Check parser doesn't break with single quotes 
               CREATE TABLE moomoo (cow VARCHAR(20));";
 
