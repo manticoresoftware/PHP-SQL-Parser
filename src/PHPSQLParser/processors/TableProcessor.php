@@ -235,8 +235,9 @@ class TableProcessor extends AbstractProcessor
                 case 'TYPE':
                 case 'STATS_AUTO_RECALC':
                 case 'STATS_PERSISTENT':
+                case 'LOCAL':
                 case 'KEY_BLOCK_SIZE':
-                    if ($prevCategory === 'CREATE_DEF') {
+                    if (in_array($prevCategory, ['CREATE_DEF', 'TABLE_NAME']) ) {
                         $expr[] = $this->getReservedType($trim);
                         $currCategory = $prevCategory = 'TABLE_OPTION';
                         continue 2;

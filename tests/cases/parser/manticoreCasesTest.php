@@ -129,7 +129,8 @@ class manticoreCasesTest extends \PHPUnit\Framework\TestCase
             ["ALTER MV view_name suspended=1", 'ms_alter_table_3'],
             // End aliases
             ["ALTER TABLE old_table RENAME new_table", 'ms_alter_table_4'],
-            ["ALTER TABLE `old_table` RENAME `new_table`", 'ms_alter_table_5']
+            ["ALTER TABLE `old_table` RENAME `new_table`", 'ms_alter_table_5'],
+            ["alter table `dist` local='t1' local='t3'", 'ms_alter_table_6']
 
         ];
     }
