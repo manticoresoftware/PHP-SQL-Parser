@@ -130,7 +130,7 @@ class manticoreCasesTest extends \PHPUnit\Framework\TestCase
             // End aliases
             ["ALTER TABLE old_table RENAME new_table", 'ms_alter_table_4'],
             ["ALTER TABLE `old_table` RENAME `new_table`", 'ms_alter_table_5'],
-            ["alter table `dist` local='t1' local='t3'", 'ms_alter_table_6']
+            ["alter table `dist` local='t1' agent='127.0.0.1:9312:remote_index' local='t3'", 'ms_alter_table_6']
 
         ];
     }

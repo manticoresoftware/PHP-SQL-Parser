@@ -236,6 +236,7 @@ class TableProcessor extends AbstractProcessor
                 case 'STATS_AUTO_RECALC':
                 case 'STATS_PERSISTENT':
                 case 'LOCAL':
+                case 'AGENT':
                 case 'KEY_BLOCK_SIZE':
                     if (in_array($prevCategory, ['CREATE_DEF', 'TABLE_NAME']) ) {
                         $expr[] = $this->getReservedType($trim);
