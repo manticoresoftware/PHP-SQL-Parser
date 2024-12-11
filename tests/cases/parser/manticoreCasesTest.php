@@ -79,6 +79,8 @@ class manticoreCasesTest extends \PHPUnit\Framework\TestCase
             ['CREATE SOURCE `test`', 'ms_create_source_2'],
             ["CREATE SOURCE kafka (id bigint, term text, abbrev text, GlossDef json) type='kafka'
 		   broker_list='kafka:9092' topic_list='my-data' consumer_group='manticore' num_consumers='4' batch='50'", 'ms_create_source_3'],
+            ["CREATE SOURCE kafka (id bigint, term '\$s_\$cv@' text, abbrev text, GlossDef json) type='kafka'
+		   broker_list='kafka:9092' topic_list='my-data' consumer_group='manticore' num_consumers='4' batch='50'", 'ms_create_source_4'],
             ['CREATE VIEW view_table', 'ms_create_view_1'],
             ["CREATE MATERIALIZED VIEW view_table TO destination_kafka AS SELECT id, term as name,
 		   abbrev as short_name, UTC_TIMESTAMP() as received_at, GlossDef.size as size FROM kafka", 'ms_create_view_2'],
