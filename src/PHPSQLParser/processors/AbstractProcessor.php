@@ -55,16 +55,16 @@ use PHPSQLParser\utils\ExpressionType;
 abstract class AbstractProcessor {
 
     /**
-     * @var Options
+     * @var ?Options
      */
     protected $options;
 
     /**
      * AbstractProcessor constructor.
      *
-     * @param Options $options
+     * @param ?Options $options
      */
-    public function __construct(Options $options = null)
+    public function __construct(?Options $options = null)
     {
         $this->options = $options;
     }
