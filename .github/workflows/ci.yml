@@ -25,13 +25,7 @@ jobs:
 
       - name: PHPUnit Tests
         uses: php-actions/phpunit@master
-        env:
-          XDEBUG_MODE: coverage
         with:
-          php_extensions: "xdebug"
-          coverage_html: "coverage/html/"
-          version: 9.5
-          bootstrap: tests/bootstrap.php
           configuration: phpunit.xml
 
       - name: Archive code coverage results
