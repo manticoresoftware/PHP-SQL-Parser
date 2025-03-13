@@ -19,7 +19,7 @@ jobs:
           - nightly
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: php-actions/composer@v6
 
@@ -35,7 +35,7 @@ jobs:
           configuration: phpunit.xml
 
       - name: Archive code coverage results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
           path: coverage/html
