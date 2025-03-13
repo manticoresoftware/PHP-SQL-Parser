@@ -227,7 +227,6 @@ class TableProcessor extends AbstractProcessor
                 case 'MIN_ROWS':
                 case 'PACK_KEYS':
                 case 'CHECKSUM':
-                case 'COMMENT':
                 case 'CONNECTION':
                 case 'AUTO_INCREMENT':
                 case 'AVG_ROW_LENGTH':
