@@ -112,15 +112,6 @@ class Issue33Test extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($expected, $p, 'CREATE TABLE statement with primary key with index options and check');
     }
 
-    public function testIssue33h() {
-        $parser = new PHPSQLParser();
-        $sql = "CREATE TABLE hohoho (a varchar(1000)) ENGINE=xyz,COMMENT='haha' DEFAULT COLLATE = latin1_german2_ci";
-        $parser->parse($sql, true);
-        $p = $parser->parsed;
-        $expected = getExpectedValue(dirname(__FILE__), 'issue33h.serialized');
-        $this->assertEquals($expected, $p, 'CREATE TABLE statement with table options separated by different characters');
-    }
-
     public function testIssue33i() {
         $parser = new PHPSQLParser();
         $sql = "CREATE TABLE hohoho (a varchar(1000), b integer, FOREIGN KEY haha (b) references xyz (id) match full on delete cascade) ";

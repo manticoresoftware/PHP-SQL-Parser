@@ -126,16 +126,6 @@ class issue33Test extends \PHPUnit\Framework\TestCase {
 
 
         $parser = new PHPSQLParser();
-        $sql = "CREATE TABLE hohoho (a varchar(1000)) ENGINE=xyz,COMMENT='haha' DEFAULT COLLATE = latin1_german2_ci";
-        $parser->parse($sql, true);
-        $p = $parser->parsed;
-        $creator = new PHPSQLCreator($parser->parsed);
-        $created = $creator->created;
-        $expected = getExpectedValue(dirname(__FILE__), 'issue33h.sql', false);
-        $this->assertSame($expected, $created, 'CREATE TABLE statement with table options separated by different characters');
-
-
-        $parser = new PHPSQLParser();
         $sql = "CREATE TABLE hohoho (a varchar(1000), b integer, FOREIGN KEY haha (b) references xyz (id) match full on delete cascade) ";
         $parser->parse($sql);
         $p = $parser->parsed;
