@@ -160,6 +160,7 @@ class SourceProcessor extends AbstractProcessor
                 case 'BATCH':
                 case 'BROKER_LIST':
                 case 'TOPIC_LIST':
+                case 'PARTITION_LIST':
                 case 'CONSUMER_GROUP':
                 case 'NUM_CONSUMERS':
                     if ($prevCategory === 'CREATE_DEF') {
