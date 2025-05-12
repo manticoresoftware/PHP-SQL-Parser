@@ -64,7 +64,7 @@ class manticoreCasesTest extends \PHPUnit\Framework\TestCase
     public function manticoreCasesTest($query, $resultFileName)
     {
         $p = $this->parser->parse($query);
-//        setExpectedValue(dirname(__FILE__), $resultFileName . '.serialized', $p);
+        setExpectedValue(dirname(__FILE__), $resultFileName . '.serialized', $p);
         $expected = getExpectedValue(dirname(__FILE__), $resultFileName . '.serialized');
         $this->assertEquals($expected, $p);
     }
@@ -96,6 +96,7 @@ class manticoreCasesTest extends \PHPUnit\Framework\TestCase
             ["CREATE TABLE destination_kafka (id bigint, name text, short_name text, received_at text, size multi) engine='columnar'", 'ms_create_table_1'],
             ["CREATE TABLE new_table LIKE existing_table WITH DATA", 'ms_create_table_2'],
             ["CREATE TABLE new_table LIKE comment WITH DATA", 'ms_create_table_3'],
+            ["CREATE TABLE new_table (id bigint, name text) engine='columnar' exceptions='wordnet-english'", 'ms_create_table_4'],
             ["SHOW TABLES", 'ms_show_tables_1'],
             ["SHOW TABLE abc", 'ms_show_tables_2'],
             ["SHOW TABLE `abc`", 'ms_show_tables_3'],
