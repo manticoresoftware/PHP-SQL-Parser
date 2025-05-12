@@ -64,7 +64,7 @@ class manticoreCasesTest extends \PHPUnit\Framework\TestCase
     public function manticoreCasesTest($query, $resultFileName)
     {
         $p = $this->parser->parse($query);
-        setExpectedValue(dirname(__FILE__), $resultFileName . '.serialized', $p);
+//        setExpectedValue(dirname(__FILE__), $resultFileName . '.serialized', $p);
         $expected = getExpectedValue(dirname(__FILE__), $resultFileName . '.serialized');
         $this->assertEquals($expected, $p);
     }
