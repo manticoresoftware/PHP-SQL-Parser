@@ -97,6 +97,7 @@ class manticoreCasesTest extends \PHPUnit\Framework\TestCase
             ["CREATE TABLE new_table LIKE existing_table WITH DATA", 'ms_create_table_2'],
             ["CREATE TABLE new_table LIKE comment WITH DATA", 'ms_create_table_3'],
             ["CREATE TABLE new_table (id bigint, name text) engine='columnar' exceptions='wordnet-english'", 'ms_create_table_4'],
+            ["CREATE TABLE new_table (id bigint, name text) exceptions='/tmp/exceptions.txt' wordforms='wordnet-english'", 'ms_create_table_5'],
             ["SHOW TABLES", 'ms_show_tables_1'],
             ["SHOW TABLE abc", 'ms_show_tables_2'],
             ["SHOW TABLE `abc`", 'ms_show_tables_3'],
