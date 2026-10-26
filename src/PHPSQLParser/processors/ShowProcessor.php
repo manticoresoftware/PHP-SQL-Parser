@@ -107,7 +107,7 @@ class ShowProcessor extends AbstractProcessor {
             case 'ERRORS':
             case 'TABLES':
             case 'SOURCES':
-            case 'VIEWS';
+            case 'VIEWS':
             case 'WARNINGS':
             case 'CHARACTER':
             case 'SET':
